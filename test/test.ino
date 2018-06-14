@@ -11,10 +11,10 @@ void setup() {
 
 void loop() { // run over and over
   if (Serial.available()) {
-    mySerial.write((char)Serial.read());
+    mySerial.write(Serial.read());
   }
   if (mySerial.available()) {
-    Serial.write((char)mySerial.read());
+    Serial.write(mySerial.read());
   }
   
 }
