@@ -1,20 +1,21 @@
+#include <SoftwareSerial.h>
+SoftwareSerial mySerial(10, 11); // RX, TX
+
 void setup() {
-  // put your setup code here, to run once:
-  //github
-  pinMode(1, OUTPUT);
-  pinMode(13, OUTPUT);
-  pinMode(3, OUTPUT);
+  // Open serial communications and wait for port to open:
+  Serial.begin(115200);
+  Serial.println("Goodnight moon!");
+  mySerial.begin(115200);
+  mySerial.println("Hello WorLd");
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-  digitalWrite(13, HIGH);
-  delay(10000);
-  digitalWrite(13, LOW);
-  digitalWrite(1, HIGH);
-  delay(5000);
-  digitalWrite(1, LOW);
-  digitalWrite(3, HIGH);
-  delay(1000);
-  digitalWrite(3, LOW);
+void loop() { // run over and over
+  if (Serial.available()) {
+    mySerial.write((char)Serial.read());
+  }
+  if (mySerial.available()) {
+    Serial.write((char)mySerial.read());
+  }
+  
 }
+
