@@ -3,11 +3,14 @@ SoftwareSerial sSerial(10, 11); // RX, TX
 String address = "henjorly.ddns.net";
 int port = 80;
 int ledPin = 13;
+int a= 753;
+String send ="";
 int relay = 7;//繼電器腳位
 void setup() {
- 
-   sSerial.begin(115200);  //設定軟體序列埠速率 (to ESP8266)
+  sSerial.begin(115200);  //設定軟體序列埠速率 (to ESP8266)
   Serial.begin(115200);  //設定軟體序列埠速率 (to PC) 
+  send = "GET /test1.php?test="+String(a);
+  Serial.println(send);
   Serial.print("Set working mode as station ... ");
   sSerial.println("AT+CWMODE=1");  //設定為 Station 模式
   delay(5000);
@@ -22,7 +25,7 @@ void setup() {
    pinMode(relay, OUTPUT);  
    digitalWrite(relay, LOW);
  Serial.println("Connect to henjorly....."+start_tcp(address, port));
- Serial.println("Send GET : " + send_data("GET /test1.php?test=2"));
+ Serial.println("Send GET : " + send_data(send));
   
 }
 
@@ -52,7 +55,7 @@ String get_ESP8266_response() {  //取得 ESP8266 的回應字串
 String start_tcp(String address, byte port) {
   sSerial.println("AT+CIPSTART=\"TCP\",\"" + address + "\"," + String(port)); 
   sSerial.flush();  //等待序列埠傳送完畢
-  delay(1000);
+  delay(2000);
   String str=get_ESP8266_response();  //取得 ESP8266 回應字串
   if (str.indexOf("OK") != -1) {return "OK";}
   else {return "NG";}
