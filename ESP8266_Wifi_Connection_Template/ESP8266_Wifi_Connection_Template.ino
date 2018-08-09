@@ -2,8 +2,8 @@
 #include "Timer.h"
 Timer t;
 SoftwareSerial debug(10,11); // make RX Arduino line is pin 4, make TX Arduino line is pin 5.
-#define SSID "chts230"
-#define PASS "12345678"
+#define SSID "iNKNUCC"
+#define PASS "168016831686"
 void setup(){
   Serial.begin(115200);
   debug.begin(115200); // your esp's baud rate might be different
