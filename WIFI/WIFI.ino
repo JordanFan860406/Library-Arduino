@@ -26,6 +26,9 @@ void loop() // run over and over
   if (response.indexOf("New") !=-1){
     Serial.println(response);
   }
+  if (response.indexOf("IP") !=-1){
+    Serial.println(response);
+  }
   if (response.indexOf("pin=3") !=-1){
     digitalWrite(13,HIGH);
   }

@@ -71,11 +71,7 @@ void loop() {
     digitalWrite(LEDB, LOW);
     digitalWrite(LEDG, LOW);
     digitalWrite(LEDR, HIGH);
-    send = "GET /test1.php?test="+String(count);
-    Serial.println("Connect to henjorly....."+start_tcp(address, port));
-    Serial.println("Send GET : " + send_data(send));
-    delay(7000);
-    count++;
+
   }
   if(count>=31){
     digitalWrite(LEDB, LOW);

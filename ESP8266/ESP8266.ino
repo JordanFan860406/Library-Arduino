@@ -57,7 +57,7 @@ void loop() {
     WiFiClient client=server.available();
     if (!client) {return;}
     Serial.println("New client");
-    String request=client.readStringUntil('\r');
+    String request=client.readStringUntil("\r");
     Serial.println(request);
     const int httpPort = 80;
   if (!client.connect(host, httpPort)) {
