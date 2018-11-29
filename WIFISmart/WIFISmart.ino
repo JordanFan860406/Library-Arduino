@@ -57,7 +57,7 @@ void repeatMe() {
 void setup() {
   Serial.begin(115200);
   delay(10);
-
+  pinMode(0, OUTPUT);
   // We start by connecting to a WiFi network
 
 //  Serial.println();
@@ -85,14 +85,20 @@ int value = 0;
 void loop() {
   timer.run();
   ++value;
-    
     WiFiClient client=server.available(); // Use WiFiClient class to create TCP connections
     if (!client) {
     }
     else{
-      Serial.println("New client"); // print new client
       String request=client.readStringUntil('\r');
-      Serial.println(request);
+      if(request.indexOf("pin=on") !=-1){
+        Serial.println(request);
+        digitalWrite(0, HIGH);
+        Serial.println(request);
+      }else if(request.indexOf("pin=off") !=-1){
+        Serial.println(request);
+        digitalWrite(0, LOW);
+      }
+      
     }
   // We now create a URI for the request
   String url = "iTaker/RedAPI/firUpdate?";//API url

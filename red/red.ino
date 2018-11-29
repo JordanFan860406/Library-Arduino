@@ -2,28 +2,26 @@
 #include <SoftwareSerial.h>
 int RECV_PIN = 3;
 int count = 0;
-String id="1";
+String id="3";
 IRrecv irrecv(RECV_PIN);
 boolean temp = false; 
 decode_results results;
-const int btnPin = 2;
+const int btnPin = 4;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
-  pinMode(11, OUTPUT);
-  pinMode(12, OUTPUT);
+//  pinMode(11, OUTPUT);
+//  pinMode(12, OUTPUT);
   pinMode(13, OUTPUT);
-  pinMode(btnPin, INPUT);
+  //pinMode(btnPin, INPUT);
   irrecv.enableIRIn();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   if(digitalRead(btnPin)==1){
-    digitalWrite(13, LOW);
-    digitalWrite(12, LOW);
-    digitalWrite(11, LOW);
     count = 0;
+    digitalWrite(13, LOW);
     dataReset();
     delay(500);
   }
@@ -41,30 +39,30 @@ void loop() {
     }
     irrecv.resume();
   }
-//  Serial.print("次數: ");
-//  Serial.println(count);
+  Serial.print("次數: ");
+  Serial.println(count);
   if(count>=10 && count<20){
-    digitalWrite(13, HIGH);
-    digitalWrite(12, LOW);
-    digitalWrite(11, LOW);
+//    digitalWrite(13, HIGH);
+//    digitalWrite(12, LOW);
+//    digitalWrite(11, LOW);
   }
   if(count>=20 && count<30){
-    digitalWrite(13, LOW);
-    digitalWrite(12, HIGH);
-    digitalWrite(11, LOW);
+//    digitalWrite(13, LOW);
+//    digitalWrite(12, HIGH);
+//    digitalWrite(11, LOW);
   }
   if(count==30){
-    digitalWrite(13, LOW);
-    digitalWrite(12, LOW);
-    digitalWrite(11, HIGH);
+    digitalWrite(13, HIGH);
+//    digitalWrite(12, LOW);
+//    digitalWrite(11, HIGH);
     sendNum();
     Serial.println(123);
     count++;
   }
   if(count>=31){
-    digitalWrite(13, LOW);
-    digitalWrite(12, LOW);
-    digitalWrite(11, HIGH);
+    digitalWrite(13, HIGH);
+//    digitalWrite(12, LOW);
+//    digitalWrite(11, HIGH);
 //    Serial.print("次數: ");
 //    Serial.println(count);
   }
@@ -89,11 +87,11 @@ void loop() {
 
 void sendNum()
 {
-    String num = "time="+String(count)+"&id="+id;
+    String num = "touch_time="+String(count)+"&bookcase_id="+id;
     Serial.println(num); 
 }
 void dataReset()
 {
-    String num = "time=0+&id=1";
+    String num = "touch_time=0&bookcase_id=3";
     Serial.println(num); 
 }
